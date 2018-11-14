@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class CreateNewScroll : MonoBehaviour
 {
+    private BaseScroll newScroll;
     
 	void Start ()
     {
-		
-	}
+        CreateScroll();
+        Debug.Log(newScroll.ItemName);
+        Debug.Log(newScroll.ItemDescription);
+        Debug.Log(newScroll.ItemID.ToString());
+        Debug.Log(newScroll.SpellEffectID.ToString());
+    }
 	
-	void Update ()
+	private void CreateScroll()
     {
-		
-	}
+        newScroll = new BaseScroll();
+        newScroll.ItemName = "Scroll";
+        newScroll.ItemDescription = "Scroll Desc";
+        newScroll.ItemID = Random.Range(0, 101);
+        newScroll.SpellEffectID = Random.Range(500, 1001);
+    }
 }
