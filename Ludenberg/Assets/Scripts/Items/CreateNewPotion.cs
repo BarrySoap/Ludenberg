@@ -8,8 +8,12 @@ public class CreateNewPotion : MonoBehaviour
     
 	void Start ()
     {
-		
-	}
+        CreatePotion();
+        Debug.Log(newPotion.ItemName);
+        Debug.Log(newPotion.ItemDescription);
+        Debug.Log(newPotion.ItemID.ToString());
+        Debug.Log(newPotion.PotionType.ToString());
+    }
 	
 	private void CreatePotion()
     {
@@ -17,6 +21,7 @@ public class CreateNewPotion : MonoBehaviour
         newPotion.ItemName = "Potion";
         newPotion.ItemDescription = "Potion Desc";
         newPotion.ItemID = Random.Range(1, 101);
+        ChoosePotionType();
     }
 
     private void ChoosePotionType()
