@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BsseScroll : BaseItem
+public class BaseScroll : BaseItem
 {
     private int spellEffectID;
 
