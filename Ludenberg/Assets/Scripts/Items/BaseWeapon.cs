@@ -15,7 +15,7 @@ public class BaseWeapon : BaseStatItem
     }
 
     private WeaponTypes weaponType;
-    private int spellEffectsID;
+    private int spellEffectID;
 
     public WeaponTypes WeaponType
     {
