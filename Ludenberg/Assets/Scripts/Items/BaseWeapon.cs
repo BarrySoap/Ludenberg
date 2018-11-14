@@ -25,7 +25,7 @@ public class BaseWeapon : BaseStatItem
 
     public int SpellEffectID
     {
-        get { return spellEffectsID; }
-        set { spellEffectsID = value; }
+        get { return spellEffectID; }
+        set { spellEffectID = value; }
     }
 }
