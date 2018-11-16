@@ -12,11 +12,14 @@ public class BasePlayer
     private int intellect;
     private int strength;
 
+    //public string PlayerName { get; set; }
+
     public string PlayerName
     {
         get { return playerName; }
         set { playerName = value; }
     }
+
     public int PlayerLevel
     {
         get { return playerLevel; }

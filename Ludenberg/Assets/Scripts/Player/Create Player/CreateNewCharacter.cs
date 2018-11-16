@@ -7,6 +7,7 @@ public class CreateNewCharacter : MonoBehaviour
     private BasePlayer newPlayer;
     private bool isMageClass;
     private bool isWarriorClass;
+    private string playerName = "Enter Name";
     
 	void Start ()
     {
@@ -20,6 +21,8 @@ public class CreateNewCharacter : MonoBehaviour
 
     void OnGUI()
     {
+        playerName = GUILayout.TextArea(playerName);
+
         if (GUILayout.Toggle(isMageClass, "Mage Class"))
         {
             isMageClass = true;
@@ -43,6 +46,7 @@ public class CreateNewCharacter : MonoBehaviour
                 newPlayer.PlayerClass = new BaseWarriorClass();
             }
 
+            newPlayer.PlayerName = playerName;
             newPlayer.PlayerLevel = 1;
             newPlayer.Stamina = newPlayer.PlayerClass.Stamina;
             newPlayer.Endurance = newPlayer.PlayerClass.Endurance;
