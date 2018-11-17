@@ -52,6 +52,7 @@ public class CreateNewCharacter : MonoBehaviour
             newPlayer.Endurance = newPlayer.PlayerClass.Endurance;
             newPlayer.Intellect = newPlayer.PlayerClass.Intellect;
             newPlayer.Strength = newPlayer.PlayerClass.Strength;
+            SaveInformation.SaveAllInformation();
         }
     }
 }

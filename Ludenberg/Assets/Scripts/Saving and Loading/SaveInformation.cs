@@ -12,5 +12,6 @@ public class SaveInformation
         PlayerPrefs.SetInt("ENDURANCE", GameInformation.Endurance);
         PlayerPrefs.SetInt("INTELLECT", GameInformation.Intellect);
         PlayerPrefs.SetInt("STRENGTH", GameInformation.Strength);
+        Debug.Log("Information saved.");
     }
 }
