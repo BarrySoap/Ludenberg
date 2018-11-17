@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CreateNewCharacter : MonoBehaviour
 {
@@ -8,16 +9,16 @@ public class CreateNewCharacter : MonoBehaviour
     private bool isMageClass;
     private bool isWarriorClass;
     private string playerName = "Enter Name";
-    
-	void Start ()
+
+    void Start()
     {
         newPlayer = new BasePlayer();
-	}
-	
-	void Update ()
+    }
+
+    void Update()
     {
-		
-	}
+
+    }
 
     void OnGUI()
     {
@@ -52,7 +53,23 @@ public class CreateNewCharacter : MonoBehaviour
             newPlayer.Endurance = newPlayer.PlayerClass.Endurance;
             newPlayer.Intellect = newPlayer.PlayerClass.Intellect;
             newPlayer.Strength = newPlayer.PlayerClass.Strength;
+            StoreNewPlayerInfo();
             SaveInformation.SaveAllInformation();
         }
+
+        if (GUILayout.Button("Load Scene"))
+        {
+            SceneManager.LoadScene("Scene2");
+        }
+    }
+
+    private void StoreNewPlayerInfo()
+    {
+        GameInformation.PlayerName = newPlayer.PlayerName;
+        GameInformation.PlayerLevel = newPlayer.PlayerLevel;
+        GameInformation.Stamina = newPlayer.Stamina;
+        GameInformation.Endurance = newPlayer.Endurance;
+        GameInformation.Intellect = newPlayer.Intellect;
+        GameInformation.Strength = newPlayer.Strength;
     }
 }
