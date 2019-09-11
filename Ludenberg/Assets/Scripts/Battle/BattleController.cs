@@ -68,6 +68,7 @@ public class BattleController : MonoBehaviour
         {
             onActions = true;
             highlighter.enabled = true;
+            cards[cardAccumulator].sprite = cardBorder;
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow) && onActions == false)
