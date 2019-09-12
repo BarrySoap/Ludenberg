@@ -53,4 +53,15 @@ public class Inventory : MonoBehaviour
     {
         return cardCollection.Count;
     }
+
+    public static void ShuffleCards()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            int random = Random.Range(0, cardCollection.Count - 1);
+            Card temp = cardCollection[random];
+            cardCollection.RemoveAt(random);
+            cardCollection.Add(temp);
+        }
+    }
 }

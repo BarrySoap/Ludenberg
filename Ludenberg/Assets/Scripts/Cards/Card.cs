@@ -22,6 +22,16 @@ public enum Elements
 
 public class Card : MonoBehaviour
 {
+    static Sprite[] icons = Resources.LoadAll<Sprite>("Cards/");
+    
+    private int tier;
+    private int cost;
+    public int id;
+    public string cardName;
+    private string description;
+    private Elements element;
+    public Sprite icon;
+
     public Card(int id, string cardName, string description, int tier, int cost)
     {
         this.id = id;
@@ -30,16 +40,16 @@ public class Card : MonoBehaviour
         this.tier = tier;
         this.cost = cost;
         Enum.TryParse((1 << UnityEngine.Random.Range(1, 8)).ToString(), out this.element);
+
+        for (int i = 0; i < icons.Length; i++)
+        {
+            if (cardName.Contains(icons[i].name))
+            {
+                icon = icons[i];
+            }
+        }
     }
 
-    private int tier;
-    private int cost;
-    public int id;
-    public string cardName;
-    private string description;
-    private Elements element;
-    private Sprite sprite;
-    
     public int Tier
     {
         get { return tier; }

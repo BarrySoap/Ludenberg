@@ -10,28 +10,38 @@ public class BattleController : MonoBehaviour
     [SerializeField]
     Sprite cardBorder;
     [SerializeField]
-    Sprite selectedCard;
+    Image selectedCard;
 
     int cardAccumulator = 0;
     Text[] options;
-    Image[] cards;
+    Image[] cardSlots;
+    List<Card> battleCards;
     bool onActions = true;
     string optionHighlighted = "";
 
     void Start()
     {
+        battleCards = new List<Card>();
+        Inventory.ShuffleCards();
+
         options = gameObject.GetComponentsInChildren<Text>();
-        cards = gameObject.GetComponentsInChildren<Image>();
+        cardSlots = gameObject.GetComponentsInChildren<Image>();
         
-        for (int i = 0; i < cards.Length; i++)
+        for (int i = 0; i < cardSlots.Length; i++)
         {
-            if (!cards[i].name.Contains("Card Slot"))
+            if (!cardSlots[i].name.Contains("Card Slot"))
             {
-                cards[i] = cards[cards.Length - 1];
-                System.Array.Resize(ref cards, cards.Length - 1);
+                cardSlots[i] = cardSlots[cardSlots.Length - 1];
+                System.Array.Resize(ref cardSlots, cardSlots.Length - 1);
             }
         }
-        System.Array.Sort(cards, (x, y) => string.Compare(x.name, y.name));
+        System.Array.Sort(cardSlots, (x, y) => string.Compare(x.name, y.name));
+        
+        for (int i = 0; i < 8; i++)
+        {
+            battleCards.Add(Inventory.cardCollection[i]);
+            cardSlots[i].sprite = battleCards[i].icon;
+        }
     }
 
     void Update()
@@ -52,11 +62,16 @@ public class BattleController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            if (onActions == false)
+            {
+                Card tempCard = battleCards[cardAccumulator];
+            }
+
             if (optionHighlighted == "Attack")
             {
                 onActions = false;
                 highlighter.enabled = false;
-                cards[cardAccumulator].sprite = selectedCard;
+                selectedCard.rectTransform.position = cardSlots[cardAccumulator].rectTransform.position;
             }
             else
             {
@@ -68,16 +83,14 @@ public class BattleController : MonoBehaviour
         {
             onActions = true;
             highlighter.enabled = true;
-            cards[cardAccumulator].sprite = cardBorder;
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow) && onActions == false)
         {
-            if (cardAccumulator != cards.Length - 1)
+            if (cardAccumulator != cardSlots.Length - 1)
             {
-                cards[cardAccumulator].sprite = cardBorder;
                 cardAccumulator++;
-                cards[cardAccumulator].sprite = selectedCard;
+                selectedCard.rectTransform.position = cardSlots[cardAccumulator].rectTransform.position;
             }
         }
 
@@ -85,9 +98,8 @@ public class BattleController : MonoBehaviour
         {
             if (cardAccumulator != 0)
             {
-                cards[cardAccumulator].sprite = cardBorder;
                 cardAccumulator--;
-                cards[cardAccumulator].sprite = selectedCard;
+                selectedCard.rectTransform.position = cardSlots[cardAccumulator].rectTransform.position;
             }
         }
     }
