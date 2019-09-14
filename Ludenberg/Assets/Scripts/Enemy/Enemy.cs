@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private int health = 100;
-    private int energy = 0;
+    private float health = 100;
+    private float energy = 0;
+    private float maxEnergy = 200;
     private int initiative = 5;
 
     private int battleInitiative;
 
-    public int Health
+    public float Health
     {
         get { return health; }
         set { health = value; }
     }
 
-    public int Energy
+    public float Energy
     {
         get { return energy; }
         set { energy = value; }
+    }
+
+    public float MaxEnergy
+    {
+        get { return maxEnergy; }
+        set { maxEnergy = value; }
     }
 
     public int Initiative
@@ -36,5 +43,20 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         battleInitiative = initiative;
+    }
+
+    public void Update()
+    {
+        if (BattleController.battleStarted == true)
+        {
+            if (this.energy < maxEnergy)
+            {
+                this.energy += (1.0f * battleInitiative) / 10;
+            }
+            else if (this.energy > maxEnergy)
+            {
+                this.energy = maxEnergy;
+            }
+        }
     }
 }

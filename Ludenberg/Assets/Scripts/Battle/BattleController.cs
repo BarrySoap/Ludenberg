@@ -17,10 +17,19 @@ public class BattleController : MonoBehaviour
     Image[] cardSlots;
     List<Card> battleCards;
     bool onActions = true;
-    string optionHighlighted = "";
+    string optionHighlighted = "Attack";
+    public static bool battleStarted = false;
+
+    Player player;
+    Enemy enemy;
 
     void Start()
     {
+        battleStarted = true;
+
+        player = GameObject.Find("Player").GetComponent<Player>();
+        enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
+        
         battleCards = new List<Card>();
         Inventory.ShuffleCards();
 
@@ -46,7 +55,8 @@ public class BattleController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)
+            || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
         {
             if (highlighter.rectTransform.anchoredPosition.y == 40.0f)
             {
@@ -62,9 +72,10 @@ public class BattleController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (onActions == false)
+            if (onActions == false && player.Energy == player.MaxEnergy)
             {
-                Card tempCard = battleCards[cardAccumulator];
+                //Card tempCard = battleCards[cardAccumulator];
+
             }
 
             if (optionHighlighted == "Attack")
@@ -85,7 +96,7 @@ public class BattleController : MonoBehaviour
             highlighter.enabled = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && onActions == false)
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) && onActions == false)
         {
             if (cardAccumulator != cardSlots.Length - 1)
             {
@@ -94,13 +105,16 @@ public class BattleController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && onActions == false)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) && onActions == false)
         {
             if (cardAccumulator != 0)
             {
                 cardAccumulator--;
                 selectedCard.rectTransform.position = cardSlots[cardAccumulator].rectTransform.position;
             }
+        }
+        if (Input.GetKeyDown(KeyCode.L)) {
+            player.Health -= 10.0f;
         }
     }
 }
